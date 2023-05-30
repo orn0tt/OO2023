@@ -14,7 +14,8 @@ import br.com.senai.trabalho.interfaces.Empresa;
 
 public class Funcionario extends Pessoa implements Empresa {
 
-	private Double salarioBruto, INSS, IR, deducaoINSS, deducaoIR;
+	private Double salarioBruto, INSS, IR = Valores.irALIQUOTA1.getValor(), deducaoINSS,
+			deducaoIR = Valores.irDEDUCAO1.getValor();
 	private List<Dependente> dependentes = new ArrayList<>();
 	private static List<Funcionario> funcionariosCadastrados = new ArrayList<>();
 	private static Set<String> cpfsCadastrados = new HashSet<>();
@@ -25,8 +26,6 @@ public class Funcionario extends Pessoa implements Empresa {
 		validarFuncionario();
 		this.salarioBruto = salarioBruto;
 		cpfsCadastrados.add(cpf);
-		IR();
-		INSS();
 		funcionariosCadastrados.add(this);
 	}
 
@@ -37,8 +36,6 @@ public class Funcionario extends Pessoa implements Empresa {
 		this.salarioBruto = salarioBruto;
 		dependentes.add(dependente);
 		cpfsCadastrados.add(cpf);
-		IR();
-		INSS();
 		funcionariosCadastrados.add(this);
 	}
 
@@ -76,7 +73,7 @@ public class Funcionario extends Pessoa implements Empresa {
 
 	}
 
-	private Boolean INSS() {
+	public Boolean INSS() {
 
 		if (salarioBruto <= Valores.inssTETO1.getValor()) {
 			INSS = Valores.inssALIQUOTA1.getValor();
@@ -103,7 +100,7 @@ public class Funcionario extends Pessoa implements Empresa {
 		}
 	}
 
-	private void IR() {
+	public void IR() {
 
 		Double c = (salarioBruto - calculoINSS()) - descontoDependentes();
 		if (c <= Valores.irTETO1.getValor()) {

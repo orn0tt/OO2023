@@ -22,7 +22,6 @@ public class TesteMain {
 
 		String arquivoEntrada = "C:\\Users\\Rooli\\poo-full-stack\\Trabalho final-POO-2023-FullStack\\src\\teste.csv";
 		String arquivoSaida = "C:\\Users\\Rooli\\poo-full-stack\\Trabalho final-POO-2023-FullStack\\src\\testeSaida.csv";
-
 		List<Funcionario> funcionarios = lerArquivo(arquivoEntrada);
 		exportarArquivo(funcionarios, arquivoSaida);
 	}
@@ -77,6 +76,8 @@ public class TesteMain {
 			} else {
 
 				funcionarios.add(funcionario);
+				funcionario.INSS();
+				funcionario.IR();
 				funcionario = null;
 			}
 		}
