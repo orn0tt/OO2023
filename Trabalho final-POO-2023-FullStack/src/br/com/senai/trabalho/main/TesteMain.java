@@ -1,4 +1,4 @@
-package main;
+package br.com.senai.trabalho.main;
 
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -12,9 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import classes.Dependente;
-import classes.Funcionario;
-import enums.Parentesco;
+import br.com.senai.trabalho.classes.Dependente;
+import br.com.senai.trabalho.classes.Funcionario;
+import br.com.senai.trabalho.enums.Parentesco;
 
 public class TesteMain {
 

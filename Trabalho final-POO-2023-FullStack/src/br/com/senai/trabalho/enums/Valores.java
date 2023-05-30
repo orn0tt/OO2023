@@ -1,4 +1,4 @@
-package enums;
+package br.com.senai.trabalho.enums;
 
 public enum Valores {
 	// INSS - Al�quotas e Dedu��es

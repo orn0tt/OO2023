@@ -1,4 +1,4 @@
-package exceptions;
+package br.com.senai.trabalho.exceptions;
 
 @SuppressWarnings("serial")
 public class FuncionarioException extends Exception {

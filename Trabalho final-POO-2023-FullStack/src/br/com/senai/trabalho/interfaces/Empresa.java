@@ -1,4 +1,4 @@
-package interfaces;
+package br.com.senai.trabalho.interfaces;
 
 public interface Empresa {
 	String listaFuncionarios();

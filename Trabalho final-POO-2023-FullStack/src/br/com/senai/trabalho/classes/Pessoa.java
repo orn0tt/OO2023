@@ -1,4 +1,4 @@
-package classes;
+package br.com.senai.trabalho.classes;
 
 import java.time.LocalDate;
 

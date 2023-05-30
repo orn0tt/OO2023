@@ -1,4 +1,4 @@
-package classes;
+package br.com.senai.trabalho.classes;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -8,9 +8,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import enums.Valores;
-import exceptions.FuncionarioException;
-import interfaces.Empresa;
+import br.com.senai.trabalho.enums.Valores;
+import br.com.senai.trabalho.exceptions.FuncionarioException;
+import br.com.senai.trabalho.interfaces.Empresa;
 
 public class Funcionario extends Pessoa implements Empresa {
 

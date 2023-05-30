@@ -1,12 +1,12 @@
-package classes;
+package br.com.senai.trabalho.classes;
 
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.HashSet;
 import java.util.Set;
 
-import enums.Parentesco;
-import exceptions.DependenteException;
+import br.com.senai.trabalho.enums.Parentesco;
+import br.com.senai.trabalho.exceptions.DependenteException;
 
 public class Dependente extends Pessoa {
 	Parentesco parentesco;
