@@ -17,10 +17,12 @@ import javax.swing.JOptionPane;
 import br.com.senai.trabalho.classes.Dependente;
 import br.com.senai.trabalho.classes.Funcionario;
 import br.com.senai.trabalho.enums.Parentesco;
+import br.com.senai.trabalho.exceptions.DependenteException;
+import br.com.senai.trabalho.exceptions.FuncionarioException;
 
-public class TesteMain {
+public class GerarPagamentos {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception, DependenteException, FuncionarioException {
 
 		String arquivoEntrada = JOptionPane.showInputDialog(null, "Digite o caminho do arquivo de entrada e seu nome:",
 				"Arquivo de entrada", 1);
@@ -70,11 +72,11 @@ public class TesteMain {
 								Enum.valueOf(Parentesco.class, parentesco));
 
 						funcionario.getDependentes().add(dependente);
-
 					} catch (Exception e) {
 
 						System.err.println(e.getMessage());
 					}
+
 					continue;
 				}
 
@@ -85,7 +87,6 @@ public class TesteMain {
 
 				funcionario = new Funcionario(nomeFuncionario, cpfFuncionario, dataNascimentoFuncionario,
 						salarioBrutoFuncionario);
-
 			} else {
 
 				funcionarios.add(funcionario);
@@ -117,9 +118,9 @@ public class TesteMain {
 
 			System.err.println("Erro ao exportar o arquivo: " + e.getMessage());
 		} finally {
+
 			JOptionPane.showMessageDialog(null, "Arquivo exportado e salvo com sucesso em: " + "'" + arquivo + "'",
 					"Arquivo de saída", 1);
 		}
-
 	}
 }
