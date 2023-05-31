@@ -55,7 +55,7 @@ public class Funcionario extends Pessoa implements Empresa {
 
 	public Double salarioLiq() {
 
-		return salarioBruto - calculoINSS() - calculoIR() - descontoDependentes();
+		return salarioBruto - calculoINSS() - calculoIR();
 	}
 
 	@Override
@@ -73,30 +73,26 @@ public class Funcionario extends Pessoa implements Empresa {
 
 	}
 
-	public Boolean INSS() {
+	public void INSS() {
 
 		if (salarioBruto <= Valores.inssTETO1.getValor()) {
 			INSS = Valores.inssALIQUOTA1.getValor();
 			deducaoINSS = Valores.inssDEDUCAO1.getValor();
-			return false;
 		} else if (salarioBruto >= Valores.inssTETO1.getValor() + 0.01
 				&& salarioBruto <= Valores.inssTETO2.getValor()) {
 			INSS = Valores.inssALIQUOTA2.getValor();
 			deducaoINSS = Valores.inssDEDUCAO2.getValor();
-			return false;
 		} else if (salarioBruto >= Valores.inssTETO2.getValor() + 0.01
 				&& salarioBruto <= Valores.inssTETO3.getValor()) {
 			INSS = Valores.inssALIQUOTA3.getValor();
 			deducaoINSS = Valores.inssDEDUCAO3.getValor();
-			return false;
 		} else if (salarioBruto >= Valores.inssTETO3.getValor() + 0.01
 				&& salarioBruto <= Valores.inssTETO4.getValor()) {
 			INSS = Valores.inssALIQUOTA4.getValor();
 			deducaoINSS = Valores.inssDEDUCAO4.getValor();
-			return false;
 		} else {
-			return true; // Obs.: Salário acima de R$ 7507,49 deve ser aplicado o valor de 14% sobre R$
-							// 7507,49
+			INSS = Valores.inssALIQUOTA5.getValor();
+			deducaoINSS = Valores.inssDEDUCAO5.getValor();
 		}
 	}
 
@@ -128,10 +124,11 @@ public class Funcionario extends Pessoa implements Empresa {
 	@Override
 	public Double calculoINSS() {
 
-		if (INSS()) {
-			return Valores.inssTETO4.getValor() * INSS - deducaoINSS;
+		if (salarioBruto > Valores.inssTETO4.getValor()) {
+			return (Valores.inssTETO4.getValor() * Valores.inssALIQUOTA5.getValor()) - deducaoINSS;
+		} else {
+			return (salarioBruto * INSS) - deducaoINSS;
 		}
-		return (salarioBruto * INSS) - deducaoINSS;
 	}
 
 	@Override
@@ -144,11 +141,17 @@ public class Funcionario extends Pessoa implements Empresa {
 		LocalDate dataAtual = LocalDate.now();
 		Period periodo = Period.between(dataNascimento, dataAtual);
 		int idade = periodo.getYears();
+
 		if (idade < 18) {
-			throw new FuncionarioException("O funcion�rio n�o pode ter menos de 18 anos.");
+			throw new FuncionarioException("O funcionário não pode ter menos de 18 anos.");
 		}
-		if (cpfsCadastrados.contains(cpf)) {
-			throw new FuncionarioException("O cpf j� foi utilizado.");
+
+		if (cpf.length() != 11) {
+			throw new FuncionarioException("CPF deve ter 11 dígitos.");
+		}
+
+		if (cpf.matches(".*[a-zA-Z].*")) {
+			throw new FuncionarioException("O CPF não pode conter letras.");
 		}
 	}
 }

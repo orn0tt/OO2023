@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import br.com.senai.trabalho.classes.Dependente;
 import br.com.senai.trabalho.classes.Funcionario;
 import br.com.senai.trabalho.enums.Parentesco;
@@ -20,9 +22,20 @@ public class TesteMain {
 
 	public static void main(String[] args) throws Exception {
 
-		String arquivoEntrada = "C:\\Users\\Rooli\\poo-full-stack\\Trabalho final-POO-2023-FullStack\\src\\teste.csv";
-		String arquivoSaida = "C:\\Users\\Rooli\\poo-full-stack\\Trabalho final-POO-2023-FullStack\\src\\testeSaida.csv";
+		String arquivoEntrada = JOptionPane.showInputDialog(null, "Digite o caminho do arquivo de entrada e seu nome:",
+				"Arquivo de entrada", 1);
+
+		String arquivoSaida = JOptionPane.showInputDialog(null,
+				"Digite o caminho que você quer salvar o arquivo de saída e seu nome:", "Arquivo de saída", 1);
+
 		List<Funcionario> funcionarios = lerArquivo(arquivoEntrada);
+
+		for (Funcionario f : funcionarios) {
+
+			f.INSS();
+			f.IR();
+		}
+
 		exportarArquivo(funcionarios, arquivoSaida);
 	}
 
@@ -76,8 +89,6 @@ public class TesteMain {
 			} else {
 
 				funcionarios.add(funcionario);
-				funcionario.INSS();
-				funcionario.IR();
 				funcionario = null;
 			}
 		}
@@ -105,6 +116,10 @@ public class TesteMain {
 		} catch (Exception e) {
 
 			System.err.println("Erro ao exportar o arquivo: " + e.getMessage());
+		} finally {
+			JOptionPane.showMessageDialog(null, "Arquivo exportado e salvo com sucesso em: " + "'" + arquivo + "'",
+					"Arquivo de saída", 1);
 		}
+
 	}
 }
